@@ -19,11 +19,11 @@ jobs:
       - name: create env file
         run: |
           touch .env
-          echo DB=${{ DB }} >> .env
-          echo DB_HOST=${{ DB_HOST }} >> .env
-          echo DB_USER=${{ DB_USER }} >> .env
-          echo DB_PASS=${{ DB_PASS }} >> .env
-          echo DB_PORT=${{ DB_PORT }} >> .env
+          echo DB=${{ secrets.DB }} >> .env
+          echo DB_HOST=${{ secrets.DB_HOST }} >> .env
+          echo DB_USER=${{ secrets.DB_USER }} >> .env
+          echo DB_PASS=${{ secrets.DB_PASS }} >> .env
+          echo DB_PORT=${{ secrets.DB_PORT }} >> .env
       - run: npm ci
       - run: npm run lint
       - run: npm test
