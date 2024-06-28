@@ -11,7 +11,6 @@ import app from '../app';
 import jwt from 'jsonwebtoken'
 import { UsersModel } from '../app/models/users';
 
-
 let server: any;
 let token: string;
 

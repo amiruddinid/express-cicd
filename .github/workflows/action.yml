@@ -24,6 +24,7 @@ jobs:
           echo DB_USER=${{ secrets.DB_USER }} >> .env
           echo DB_PASS=${{ secrets.DB_PASS }} >> .env
           echo DB_PORT=${{ secrets.DB_PORT }} >> .env
+          cat .env
       - run: npm ci
       - run: npm run lint
       - run: npm test
