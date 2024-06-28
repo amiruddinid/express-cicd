@@ -1,11 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import dotenv from 'dotenv';
-import knexConfig from '../knexfile';
-const envPath = process.env.NODE_ENV === 'development' ? 
-  '.env' : `.env.${process.env.NODE_ENV}`
-  
-dotenv.config({path: envPath})
-console.log(envPath)
 import request from 'supertest';
 import app from '../app';
 import jwt from 'jsonwebtoken'
@@ -22,7 +15,6 @@ const user = {
 }
 
 beforeAll((done) => {
-    console.log(process.env.NODE_ENV, knexConfig[process.env.NODE_ENV || "development"])
     server = app.listen(8000, () => {
         done()
     })
@@ -56,7 +48,6 @@ describe('POST /api/v1/register', () => {
             .send(user)
             .set('Accept', 'application/json')
             .then((res: { statusCode: unknown; body: unknown; }) => {
-                console.log(res.body)
                 expect(res.statusCode).toBe(409)
                 expect(res.body).toEqual(
                     expect.objectContaining({
@@ -93,7 +84,7 @@ describe('POST /api/v1/login', () => {
             .send(user)
             .set('Accept', 'application/json')
             .then((res: { statusCode: unknown; body: any; }) => {
-                token = res.body.token;
+                token = res.body.data.token;
                 expect(res.statusCode).toBe(200)
                 expect(res.body).toEqual(
                     expect.objectContaining({
@@ -155,8 +146,8 @@ describe('POST /api/v1/whoami', () => {
             .get('/api/v1/whoami')
             .send(user)
             .set('Accept', 'application/json')
+            .set('Authorization', 'Bearer ' + token)
             .then((res: { statusCode: number; body: any; }) => {
-                const decodedToken = jwt.verify(token, "Rahasia")
                 expect(res.statusCode).toBe(200)
                 expect(res.body).toEqual(
                     expect.objectContaining({
@@ -166,14 +157,14 @@ describe('POST /api/v1/whoami', () => {
                             id: expect.any(Number),
                             nama: user.nama,
                             email: user.email,
-                            avatar: expect.any(String),
-                            role: expect.any(String),
+                            avatar: null,
+                            role: "user",
                             password: expect.any(String),
-                            createdAt: expect.any(String),
-                            updatedAt: expect.any(String),
-                            googleId: expect.any(String),
-                            createdBy: expect.anything(),
-                            updatedBy: expect.anything()
+                            created_at: expect.any(String),
+                            updated_at: expect.any(String),
+                            googleId: null,
+                            created_by: null,
+                            updated_by: null
                         }
                     })
                 )
