@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import dotenv from 'dotenv';
+import knexConfig from '../knexfile';
 const envPath = process.env.NODE_ENV === 'development' ? 
   '.env' : `.env.${process.env.NODE_ENV}`
   
@@ -9,7 +10,7 @@ import request from 'supertest';
 import app from '../app';
 import jwt from 'jsonwebtoken'
 import { UsersModel } from '../app/models/users';
-import knexConfig from '../knexfile';
+
 
 let server: any;
 let token: string;
