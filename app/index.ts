@@ -16,8 +16,8 @@ import knexConfig from '../knexfile';
 const app: Express = express();
 
 //knex
+console.log(process.env.NODE_ENV, knexConfig[process.env.NODE_ENV || "development"])
 const knexInstance = knex(knexConfig[process.env.NODE_ENV || "development"])
-console.log(knexConfig[process.env.NODE_ENV || "development"])
 
 Model.knex(knexInstance);
 //endknex
