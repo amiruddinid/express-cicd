@@ -5,7 +5,7 @@ const envPath = process.env.NODE_ENV === 'development' ?
   '.env' : `.env.${process.env.NODE_ENV}`
   
 dotenv.config({path: envPath})
-console.log(process.env.NODE_ENV, knexConfig[process.env.NODE_ENV || "development"])
+console.log(envPath)
 import request from 'supertest';
 import app from '../app';
 import jwt from 'jsonwebtoken'

@@ -18,13 +18,12 @@ jobs:
           node-version: '18.x'
       - name: create env file
         run: |
-          touch .env
-          echo DB=${{ secrets.DB }} >> .env
-          echo DB_HOST=${{ secrets.DB_HOST }} >> .env
-          echo DB_USER=${{ secrets.DB_USER }} >> .env
-          echo DB_PASS=${{ secrets.DB_PASS }} >> .env
-          echo DB_PORT=${{ secrets.DB_PORT }} >> .env
-          cat .env
+          touch .env.test
+          echo DB=${{ secrets.DB }} >> .env.test
+          echo DB_HOST=${{ secrets.DB_HOST }} >> .env.test
+          echo DB_USER=${{ secrets.DB_USER }} >> .env.test
+          echo DB_PASS=${{ secrets.DB_PASS }} >> .env.test
+          echo DB_PORT=${{ secrets.DB_PORT }} >> .env.test
       - run: npm ci
       - run: npm run lint
       - run: npm test
