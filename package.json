@@ -7,7 +7,7 @@
   "scripts": {
     "start": "set NODE_ENV=production& node ./build/bin/www",
     "dev": "set NODE_ENV=development& ts-node-dev --respawn --transpile-only ./bin/www",
-    "test": "jest",
+    "test": "jest --silent=false",
     "lint": "eslint",
     "db:migrate": "knex migrate:latest",
     "db:seed": "knex seed:run",
