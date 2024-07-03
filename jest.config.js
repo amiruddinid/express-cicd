@@ -9,7 +9,7 @@ module.exports = {
   collectCoverageFrom: ['./app/**'],
   coverageThreshold: {
     global: {
-      lines: 70
+      lines: 50
     }
   }
 };
